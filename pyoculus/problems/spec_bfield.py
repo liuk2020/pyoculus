@@ -41,6 +41,15 @@ class SPECBfield(SPECProblem, ToroidalBfield):
 
         ## The output of B contains the jacobian factor
         self.has_jacobian = True
+    
+    def vectorPotential(self, coords, *args):
+        """! Returns magnetic fields
+        @param coordinates \f$(s,\theta,\zeta)\f$
+        @param *args extra parameters
+        @returns the covariant vector potential \f$(A_\theta, A_\zeta)$\f
+        """
+
+        return self.fortran_module.specbfield.get_vectorpotential(coords)
 
     def B(self, coords, *args):
         """! Returns magnetic fields
